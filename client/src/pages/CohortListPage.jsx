@@ -67,7 +67,7 @@ function CohortListPage() {
 							<CohortCard
 								key={cohort._id}
 								{...cohort}
-								className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
+								className={"bg-white odd:bg-gray-100"}
 							/>
 						)
 					)
