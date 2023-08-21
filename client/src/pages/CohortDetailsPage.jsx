@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useTransition } from "react"
 import { useParams, Link } from "react-router-dom"
 import axios from "axios"
 import StudentCard from "../components/StudentCard"
 import StudentCreateForm from "../components/StudentCreateForm"
-
+import { useContext } from "react"
+import { UserContext } from "../context/AuthContext"
 // Import the string from the .env with URL of the API/server - http://localhost:5005
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -11,7 +12,8 @@ function CohortDetailsPage() {
 	const [cohort, setCohort] = useState(null)
 	const [students, setStudents] = useState([])
 	const [loading, setLoading] = useState(true)
-
+	const valuesFromTheContext = useContext(UserContext)
+	console.log(valuesFromTheContext)
 	const [showDrawer, setShowDrawer] = useState(false)
 
 	const { cohortId } = useParams()

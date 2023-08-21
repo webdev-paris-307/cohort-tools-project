@@ -4,7 +4,8 @@ import CohortFilterBar from "../components/CohortFilterBar"
 import CohortCard from "../components/CohortCard"
 
 // Import the string from the .env with URL of the API/server - http://localhost:5005
-const API_URL = import.meta.env.VITE_API_URL
+// const API_URL = import.meta.env.VITE_API_URL
+import myApi from "../api/service"
 
 function CohortListPage() {
 	const [cohorts, setCohorts] = useState([])
@@ -20,21 +21,37 @@ function CohortListPage() {
 		if (campusQuery) queryString += `campus=${campusQuery}&`
 		if (programQuery) queryString += `program=${programQuery}`
 
-		axios
-			.get(`${API_URL}/api/cohorts?${queryString}`)
+		myApi
+			.filterCohort(queryString)
 			.then((response) => {
 				setCohorts(response.data)
 			})
 			.catch((error) => console.log(error))
+		// axios
+		// 	.get(`${API_URL}/api/cohorts?${queryString}`, {
+		// 		headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+		// 	})
+		// 	.then((response) => {
+		// 		setCohorts(response.data)
+		// 	})
+		// 	.catch((error) => console.log(error))
 	}, [campusQuery, programQuery])
 
 	const getAllCohorts = () => {
-		axios
-			.get(`${API_URL}/api/cohorts`)
+		myApi
+			.getAllCohorts()
 			.then((response) => {
 				setCohorts(response.data)
 			})
 			.catch((error) => console.log(error))
+		// axios
+		// 	.get(`${API_URL}/api/cohorts`, {
+		// 		headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+		// 	})
+		// 	.then((response) => {
+		// 		setCohorts(response.data)
+		// 	})
+		// 	.catch((error) => console.log(error))
 	}
 
 	useEffect(() => {

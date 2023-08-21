@@ -14,7 +14,7 @@ const rounds = 12
 router.post("/signup", async (req, res, next) => {
 	try {
 		const { email, password } = req.body
-
+		console.log(req.body)
 		if (!email || !password) {
 			return res
 				.status(400)

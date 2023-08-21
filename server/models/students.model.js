@@ -51,7 +51,7 @@ const studentsSchema = new Schema(
 		cohort: {
 			type: Schema.Types.ObjectId,
 			// type: SchemaTypes.ObjectId
-			ref: "",
+			ref: "Cohort",
 		},
 		projects: [String],
 	},
